@@ -34,13 +34,5 @@ data are assumed).
 - RAG colours only where they lead to an action
 - No automatic price cuts; margin is always considered
 
-## Assumptions and limitations
-See `docs/assumptions.md`. All data is sample data; Amazon's Buy Box
-algorithm is not assumed.
 
-## Links
-- Prototype: <Figma link>
-- Rationale document: `docs/product-rationale.md`
-- Walkthrough: <Loom link>
 
-Built for HelloPM Assignment 5.
