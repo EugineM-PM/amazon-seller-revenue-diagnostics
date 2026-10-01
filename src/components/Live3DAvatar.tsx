@@ -383,7 +383,7 @@ export const Live3DAvatar: React.FC<Live3DAvatarProps> = ({
       onClick={onClick}
       className={`relative cursor-pointer select-none transition-transform active:scale-95 ${className}`}
       style={{ width: `${size}px`, height: `${size}px` }}
-      title="Click 3D Live AI Baker Avatar to speak or pause analysis"
+      title="Click Live Advisor Seller Genie to speak or pause analysis"
     />
   );
 };

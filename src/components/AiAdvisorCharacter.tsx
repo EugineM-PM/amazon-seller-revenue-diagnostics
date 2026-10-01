@@ -225,17 +225,17 @@ export const AiAdvisorCharacter: React.FC<AiAdvisorCharacterProps> = ({
       <div className="fixed bottom-5 right-5 z-40">
         <button
           onClick={onToggle}
-          className="flex items-center gap-2 pl-2 pr-4 py-2 rounded-full bg-slate-900 text-white font-bold text-xs shadow-2xl border border-amber-500/40 hover:border-amber-400 hover:scale-105 transition-all cursor-pointer group"
+          className="flex items-center gap-2.5 pl-2.5 pr-4 py-2 rounded-full bg-slate-900 text-white font-bold text-xs shadow-2xl border border-amber-500/40 hover:border-amber-400 hover:scale-105 transition-all cursor-pointer group"
         >
           <div className="w-8 h-8 rounded-full overflow-hidden bg-slate-800 border-2 border-amber-400 flex items-center justify-center">
             <Live3DAvatar isSpeaking={false} size={48} className="scale-75" />
           </div>
           <div className="flex flex-col text-left leading-tight">
             <span className="font-extrabold text-white flex items-center gap-1">
-              Live 3D AI Baker
-              <span className="text-[10px] text-amber-400">🎙️</span>
+              Live Advisor Seller Genie
+              <span className="text-[10px] text-amber-400">🧞</span>
             </span>
-            <span className="text-[10px] text-amber-300 font-medium">Click to hear live explanation</span>
+            <span className="text-[10px] text-amber-300 font-medium">Click to open 3D voice analysis</span>
           </div>
         </button>
       </div>
@@ -243,23 +243,36 @@ export const AiAdvisorCharacter: React.FC<AiAdvisorCharacterProps> = ({
   }
 
   return (
-    <aside aria-label="Live 3D AI Seller Advisor" className="fixed bottom-5 right-5 z-40 max-w-sm sm:max-w-md w-[calc(100vw-2.5rem)] shadow-2xl rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden transition-all duration-300">
+    <aside 
+      aria-label="Live Advisor Seller Genie" 
+      className={`fixed bottom-5 right-5 z-40 max-w-sm sm:max-w-md w-[calc(100vw-2.5rem)] shadow-2xl rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden transition-all duration-300 ${
+        !isExpanded ? 'max-w-[320px] sm:max-w-[340px]' : ''
+      }`}
+    >
       
       {/* 3D Character Stage & Header */}
-      <div className="bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 p-4 text-white border-b border-slate-800">
+      <div className="bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 p-3.5 sm:p-4 text-white border-b border-slate-800">
         
-        {/* Top Control Bar */}
-        <div className="flex items-center justify-between pb-2 border-b border-slate-800/80 mb-3">
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-xs font-black tracking-wide text-white">LIVE 3D AI ADVISOR</span>
-            <span className="text-[10px] text-amber-400 font-semibold bg-amber-950/70 border border-amber-800 px-1.5 py-0.5 rounded">
-              Pillsbury Baker
-            </span>
+        {/* Top Control Bar (Always visible, click header to toggle collapse) */}
+        <div className="flex items-center justify-between pb-2 border-b border-slate-800/80 mb-2.5">
+          <div 
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="flex items-center gap-2 cursor-pointer group select-none"
+            title="Click to collapse or expand AI Advisor"
+          >
+            <span className={`w-2.5 h-2.5 rounded-full ${isSpeaking ? 'bg-emerald-400 animate-ping' : 'bg-emerald-400'}`} />
+            <div className="flex items-center gap-1.5">
+              <span className="text-xs font-black tracking-wide text-white group-hover:text-amber-400 transition-colors">
+                LIVE ADVISOR
+              </span>
+              <span className="text-[10px] text-amber-400 font-extrabold bg-amber-950/80 border border-amber-800 px-1.5 py-0.5 rounded shadow-xs">
+                Seller Genie 🧞
+              </span>
+            </div>
           </div>
 
           <div className="flex items-center gap-1">
-            {/* Quick voice mute / unmute */}
+            {/* Quick voice mute / play */}
             <button
               onClick={toggleSpeak}
               className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
@@ -272,87 +285,139 @@ export const AiAdvisorCharacter: React.FC<AiAdvisorCharacterProps> = ({
               {isSpeaking ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
             </button>
 
-            {/* Minimize */}
+            {/* Collapse / Expand Toggle Button */}
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
+              className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer flex items-center gap-1"
+              title={isExpanded ? 'Collapse window' : 'Expand window'}
             >
-              {isExpanded ? <ChevronDown className="w-4 h-4" /> : <ChevronUp className="w-4 h-4" />}
+              {isExpanded ? (
+                <>
+                  <ChevronDown className="w-4 h-4" />
+                </>
+              ) : (
+                <>
+                  <ChevronUp className="w-4 h-4" />
+                  <span className="text-[10px] font-bold text-amber-400">Expand</span>
+                </>
+              )}
             </button>
 
             {/* Turn off */}
             <button
               onClick={onToggle}
               className="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-slate-800 transition-colors cursor-pointer"
-              title="Close AI Character"
+              title="Close Live Advisor"
             >
               <X className="w-4 h-4" />
             </button>
           </div>
         </div>
 
-        {/* 3D Character Hero Box */}
-        <div className="flex items-center gap-4">
-          {/* Live Interactive 3D Canvas */}
-          <div className="relative shrink-0 flex items-center justify-center bg-slate-900/90 rounded-2xl border border-slate-700/80 shadow-inner p-1 group">
-            <Live3DAvatar
-              isSpeaking={isSpeaking}
-              onClick={toggleSpeak}
-              size={135}
-              className="rounded-xl overflow-hidden"
-            />
-            {isSpeaking && (
-              <div className="absolute top-2 right-2 px-1.5 py-0.5 rounded-md bg-emerald-500/90 text-slate-950 text-[9px] font-extrabold flex items-center gap-1 shadow-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-slate-950 animate-ping" />
-                SPEAKING
+        {/* Collapsed Compact Preview Bar */}
+        {!isExpanded ? (
+          <div 
+            onClick={() => setIsExpanded(true)}
+            className="flex items-center justify-between gap-3 pt-1 cursor-pointer group"
+          >
+            <div className="flex items-center gap-2.5">
+              <div className="w-10 h-10 rounded-xl bg-slate-900 border border-amber-500/40 overflow-hidden flex items-center justify-center p-0.5 shrink-0">
+                <Live3DAvatar
+                  isSpeaking={isSpeaking}
+                  size={40}
+                  className="scale-90"
+                />
               </div>
-            )}
-            <div className="absolute bottom-1 inset-x-0 text-center">
-              <span className="text-[9px] text-slate-400 bg-slate-950/80 px-2 py-0.5 rounded-full">
-                Click me to speak
-              </span>
-            </div>
-          </div>
-
-          {/* Quick Stats at a glance */}
-          <div className="flex-1 flex flex-col justify-between py-1 space-y-2">
-            <div>
-              <div className="text-xs text-slate-400 font-medium">Health Score Breakdown</div>
-              <div className="text-xl font-black text-white flex items-center gap-2">
-                <span>{sellerHealth.overallScore}/100</span>
-                <span className="text-xs font-bold text-rose-400">
-                  {sellerHealth.scoreDelta > 0 ? `+${sellerHealth.scoreDelta}` : sellerHealth.scoreDelta} pts
+              <div className="flex flex-col text-left leading-tight">
+                <span className="text-xs font-bold text-white flex items-center gap-1.5">
+                  <span>Score: {sellerHealth.overallScore}/100</span>
+                  <span className="text-[10px] text-rose-400">({sellerHealth.scoreDelta > 0 ? `+${sellerHealth.scoreDelta}` : sellerHealth.scoreDelta} pts)</span>
+                </span>
+                <span className="text-[10px] text-slate-400 truncate max-w-[170px]">
+                  {isSpeaking ? '🎙️ Speaking live...' : `Click to expand · ${language.split(' ')[0]}`}
                 </span>
               </div>
             </div>
 
-            <div className="text-xs text-slate-300 line-clamp-2 leading-snug">
-              Primary Concern: <strong className="text-amber-300">{sellerHealth.primaryConcern}</strong>
-            </div>
-
-            {/* Quick Action Audio Trigger */}
             <button
-              onClick={toggleSpeak}
-              className={`w-full py-1.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-md ${
-                isSpeaking
-                  ? 'bg-rose-600 hover:bg-rose-500 text-white'
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleSpeak();
+              }}
+              className={`px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1 transition-all cursor-pointer ${
+                isSpeaking 
+                  ? 'bg-rose-600 text-white' 
                   : 'bg-amber-500 hover:bg-amber-400 text-slate-950'
               }`}
             >
-              {isSpeaking ? (
-                <>
-                  <Pause className="w-3.5 h-3.5 fill-current" />
-                  <span>Pause Live Speech</span>
-                </>
-              ) : (
-                <>
-                  <Play className="w-3.5 h-3.5 fill-current" />
-                  <span>Hear Live Explanation</span>
-                </>
-              )}
+              {isSpeaking ? <Pause className="w-3 h-3 fill-current" /> : <Play className="w-3 h-3 fill-current" />}
+              <span>{isSpeaking ? 'Pause' : 'Listen'}</span>
             </button>
           </div>
-        </div>
+        ) : (
+          /* Full 3D Character Hero Box when expanded */
+          <div className="flex items-center gap-4">
+            {/* Live Interactive 3D Canvas */}
+            <div className="relative shrink-0 flex items-center justify-center bg-slate-900/90 rounded-2xl border border-slate-700/80 shadow-inner p-1 group">
+              <Live3DAvatar
+                isSpeaking={isSpeaking}
+                onClick={toggleSpeak}
+                size={135}
+                className="rounded-xl overflow-hidden"
+              />
+              {isSpeaking && (
+                <div className="absolute top-2 right-2 px-1.5 py-0.5 rounded-md bg-emerald-500/90 text-slate-950 text-[9px] font-extrabold flex items-center gap-1 shadow-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-slate-950 animate-ping" />
+                  SPEAKING
+                </div>
+              )}
+              <div className="absolute bottom-1 inset-x-0 text-center">
+                <span className="text-[9px] text-slate-400 bg-slate-950/80 px-2 py-0.5 rounded-full">
+                  Click to speak
+                </span>
+              </div>
+            </div>
+
+            {/* Quick Stats at a glance */}
+            <div className="flex-1 flex flex-col justify-between py-1 space-y-2">
+              <div>
+                <div className="text-xs text-slate-400 font-medium">Health Score Breakdown</div>
+                <div className="text-xl font-black text-white flex items-center gap-2">
+                  <span>{sellerHealth.overallScore}/100</span>
+                  <span className="text-xs font-bold text-rose-400">
+                    {sellerHealth.scoreDelta > 0 ? `+${sellerHealth.scoreDelta}` : sellerHealth.scoreDelta} pts
+                  </span>
+                </div>
+              </div>
+
+              <div className="text-xs text-slate-300 line-clamp-2 leading-snug">
+                Primary Concern: <strong className="text-amber-300">{sellerHealth.primaryConcern}</strong>
+              </div>
+
+              {/* Quick Action Audio Trigger */}
+              <button
+                onClick={toggleSpeak}
+                className={`w-full py-1.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-md ${
+                  isSpeaking
+                    ? 'bg-rose-600 hover:bg-rose-500 text-white'
+                    : 'bg-amber-500 hover:bg-amber-400 text-slate-950'
+                }`}
+              >
+                {isSpeaking ? (
+                  <>
+                    <Pause className="w-3.5 h-3.5 fill-current" />
+                    <span>Pause Live Speech</span>
+                  </>
+                ) : (
+                  <>
+                    <Play className="w-3.5 h-3.5 fill-current" />
+                    <span>Hear Live Explanation</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        )}
 
       </div>
 

@@ -115,10 +115,10 @@ export const Header: React.FC<HeaderProps> = ({
                 </div>
                 <div className="flex flex-col leading-none">
                   <span className="text-xs font-bold text-slate-100 flex items-center gap-1">
-                    Live 3D AI
-                    <span className="text-[9px] font-normal text-amber-400 px-1 py-0.2 bg-amber-950/70 rounded">Doughboy Baker</span>
+                    Live Advisor
+                    <span className="text-[9px] font-normal text-amber-400 px-1 py-0.2 bg-amber-950/70 rounded">Seller Genie</span>
                   </span>
-                  <span className="text-[10px] text-slate-400">Voice Diagnostics</span>
+                  <span className="text-[10px] text-slate-400">3D Voice Diagnostics</span>
                 </div>
               </div>
               

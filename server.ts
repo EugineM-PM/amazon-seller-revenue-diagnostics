@@ -109,8 +109,9 @@ app.post('/api/advisor/explain', async (req, res) => {
       });
     }
 
-    const prompt = `You are Aura, the friendly Doughboy-style Amazon 3P Seller Analytics Mascot and Advisor. 
+    const prompt = `You are Live Advisor Seller Genie, the friendly and sharp Amazon 3P Seller Analytics Mascot and Advisor. 
 You are cheerful, sharp, empathetic, and expert at Amazon marketplace analytics.
+You help sellers explain and understand reports, trends, and numbers in an easy, quick, and concise way.
 The user is a small brand owner/seller. You must provide a concise, razor-sharp, actionable explanation in ${language}.
 
 Seller Context:
