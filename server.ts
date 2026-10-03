@@ -109,9 +109,8 @@ app.post('/api/advisor/explain', async (req, res) => {
       });
     }
 
-    const prompt = `You are Live Advisor Seller Genie, the friendly and sharp Amazon 3P Seller Analytics Mascot and Advisor. 
+    const prompt = `You are Seller Genie, the friendly and knowledgeable Amazon 3P Seller Analytics Mascot and AI Advisor. 
 You are cheerful, sharp, empathetic, and expert at Amazon marketplace analytics.
-You help sellers explain and understand reports, trends, and numbers in an easy, quick, and concise way.
 The user is a small brand owner/seller. You must provide a concise, razor-sharp, actionable explanation in ${language}.
 
 Seller Context:
@@ -170,6 +169,46 @@ Guidelines for your response:
 // Applet health check
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'healthy', timestamp: new Date().toISOString() });
+});
+
+// LLM-powered dynamic catalog generator
+app.post('/api/generate-catalog', async (req, res) => {
+  try {
+    const { categoryTheme = 'Consumer Retail' } = req.body;
+    if (!ai) {
+      return res.json({
+        success: true,
+        source: 'seeded_catalog',
+        message: 'Using seeded 10-product 5-category dataset',
+      });
+    }
+
+    const prompt = `You are a senior e-commerce catalog analytics data architect for Amazon.
+Generate a JSON array of 5 categories with exactly 2 products each (total 10 products).
+Categories: Electronics & Audio, Home & Kitchen, Health & Personal Care, Computers & Accessories, Smart Wearables & Fitness.
+Each product must have: id, name, asin, sku, category, currentPrice, lowestCompetitorPrice, revenue, orders, buyBoxPct, daysOfCover.
+Return valid JSON only.`;
+
+    const response = await ai.models.generateContent({
+      model: 'gemini-3.8-flash',
+      contents: prompt,
+      config: {
+        responseMimeType: 'application/json',
+      },
+    });
+
+    const parsed = JSON.parse(response.text || '{}');
+    res.json({
+      success: true,
+      source: 'gemini',
+      data: parsed,
+    });
+  } catch (error: any) {
+    res.json({
+      success: false,
+      error: error?.message || 'Failed to generate catalog via LLM',
+    });
+  }
 });
 
 // Vite middleware in dev or static files in production

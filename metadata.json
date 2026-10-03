@@ -1,6 +1,8 @@
 {
-  "name": "AuraSeller - Amazon Revenue & Root-Cause Analytics",
+  "name": "Remix AuraSeller - Amazon Revenue \u0026 Root-Cause Analytics",
   "description": "Proactive Amazon 3P seller intelligence platform diagnosing what happened, why revenue changed, and actionable fixes across Buy Box, Search Visibility, Pricing, Conversion, and Inventory.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }
